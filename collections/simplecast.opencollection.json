@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Simplecast API",
+    "version": "1.0",
+    "description": "Simplecast podcast hosting, distribution, and analytics API. Base URL https://api.simplecast.com. Bearer token from the Private Apps page. List endpoints support limit and offset."
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{token}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Podcasts", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List podcasts.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/podcasts" },
+          "docs": "Lists the podcasts accessible to the authenticated account."
+        },
+        {
+          "info": { "name": "Retrieve a podcast.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/podcasts/:podcast_id", "params": [ { "name": "podcast_id", "value": "", "type": "path", "description": "The ID of the podcast." } ] },
+          "docs": "Retrieves a single podcast by ID."
+        },
+        {
+          "info": { "name": "List episodes for a podcast.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/podcasts/:podcast_id/episodes", "params": [ { "name": "podcast_id", "value": "", "type": "path", "description": "The ID of the podcast." } ] },
+          "docs": "Lists the episodes belonging to a podcast."
+        },
+        {
+          "info": { "name": "List podcast categories.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/podcasts/:podcast_id/categories", "params": [ { "name": "podcast_id", "value": "", "type": "path", "description": "The ID of the podcast." } ] },
+          "docs": "Lists the categories for a podcast."
+        },
+        {
+          "info": { "name": "List podcast seasons.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/podcasts/:podcast_id/seasons", "params": [ { "name": "podcast_id", "value": "", "type": "path", "description": "The ID of the podcast." } ] },
+          "docs": "Lists the seasons for a podcast."
+        },
+        {
+          "info": { "name": "Retrieve podcast RSS feed.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/podcasts/:podcast_id/rss", "params": [ { "name": "podcast_id", "value": "", "type": "path", "description": "The ID of the podcast." } ] },
+          "docs": "Returns the generated RSS feed for a podcast."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Episodes", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve an episode.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/episodes/:episode_id", "params": [ { "name": "episode_id", "value": "", "type": "path", "description": "The ID of the episode." } ] },
+          "docs": "Retrieves a single episode by ID."
+        },
+        {
+          "info": { "name": "List episode markers.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/episodes/:episode_id/markers", "params": [ { "name": "episode_id", "value": "", "type": "path", "description": "The ID of the episode." } ] },
+          "docs": "Lists the chapter markers defined on an episode."
+        },
+        {
+          "info": { "name": "List episode keywords.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/episodes/:episode_id/keywords", "params": [ { "name": "episode_id", "value": "", "type": "path", "description": "The ID of the episode." } ] },
+          "docs": "Lists the keywords on an episode."
+        },
+        {
+          "info": { "name": "Upload episode audio.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.simplecast.com/episodes/:episode_id/audio", "params": [ { "name": "episode_id", "value": "", "type": "path", "description": "The ID of the episode." } ], "body": { "type": "formdata", "data": [ { "key": "file", "type": "file" } ] } },
+          "docs": "Uploads the audio file for an episode."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Analytics", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Overview analytics.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/analytics?podcast=:podcast_id", "params": [ { "name": "podcast", "value": "", "type": "query", "description": "The podcast ID." } ] },
+          "docs": "Returns overview analytics scoped to a podcast."
+        },
+        {
+          "info": { "name": "Download analytics.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/analytics/downloads?podcast=:podcast_id", "params": [ { "name": "podcast", "value": "", "type": "query", "description": "The podcast ID." } ] },
+          "docs": "Returns download analytics."
+        },
+        {
+          "info": { "name": "Listener analytics.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/analytics/listeners?podcast=:podcast_id", "params": [ { "name": "podcast", "value": "", "type": "query", "description": "The podcast ID." } ] },
+          "docs": "Returns listener analytics."
+        },
+        {
+          "info": { "name": "Top 10 episodes.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/analytics/episodes/top_10?podcast=:podcast_id", "params": [ { "name": "podcast", "value": "", "type": "query", "description": "The podcast ID." } ] },
+          "docs": "Returns the top 10 episodes by downloads."
+        },
+        {
+          "info": { "name": "Location analytics.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/analytics/location?podcast=:podcast_id", "params": [ { "name": "podcast", "value": "", "type": "query", "description": "The podcast ID." } ] },
+          "docs": "Returns geographic location analytics."
+        },
+        {
+          "info": { "name": "Technology analytics.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/analytics/technology?podcast=:podcast_id", "params": [ { "name": "podcast", "value": "", "type": "query", "description": "The podcast ID." } ] },
+          "docs": "Returns listening-technology analytics (applications, browsers, devices, OSes, web players, network types)."
+        },
+        {
+          "info": { "name": "Embed player analytics.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/analytics/embed?podcast=:podcast_id", "params": [ { "name": "podcast", "value": "", "type": "query", "description": "The podcast ID." } ] },
+          "docs": "Returns embeddable-player analytics (listens, locations, speeds, heatmap, average completion)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Distribution", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List distribution channels.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/distribution_channels" },
+          "docs": "Lists distribution channels."
+        },
+        {
+          "info": { "name": "Retrieve a distribution channel.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/distribution_channels/:channel_id", "params": [ { "name": "channel_id", "value": "", "type": "path", "description": "The ID of the distribution channel." } ] },
+          "docs": "Retrieves a single distribution channel."
+        },
+        {
+          "info": { "name": "List distribution channels for a podcast.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/podcasts/:podcast_id/distribution_channels", "params": [ { "name": "podcast_id", "value": "", "type": "path", "description": "The ID of the podcast." } ] },
+          "docs": "Lists the distribution channels a podcast is syndicated to."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Metadata", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Current user.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/current_user" },
+          "docs": "Returns information about the authenticated user."
+        },
+        {
+          "info": { "name": "List categories.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/categories" },
+          "docs": "Lists podcast categories."
+        },
+        {
+          "info": { "name": "List timezones.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.simplecast.com/timezones" },
+          "docs": "Lists supported timezones."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Simplecast
+providerId: simplecast
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Podcasting
+- Podcast Hosting
+- Podcast Analytics
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Simplecast spend. Simplecast is a subscription SaaS podcast
+  hosting, distribution, and analytics platform owned by SiriusXM Media. Cost is
+  driven by a recurring monthly (or annual-prepay) plan subscription, with tiers
+  differentiated primarily by monthly download allowance, team seats, and
+  analytics/ad features. Higher tiers (Professional, Enterprise) are custom
+  contracts that add dynamic ad insertion, secondary feeds, and API integration.
+  The REST API itself is not separately metered - it reads the same podcast,
+  episode, analytics, and distribution data your plan already covers - so API
+  usage does not add incremental cost beyond the plan subscription.
+notes: >-
+  Per-tier prices and download allowances are taken from the public pricing page
+  and are not reconciled against a live quote. Enterprise/Professional pricing is
+  contact-sales. Reconcile the exact plan, download allowance, and whether API
+  access is gated to a higher tier with Simplecast / SiriusXM Media.
+sources:
+- https://www.simplecast.com/pricing
+- https://www.simplecast.com/
+- https://apidocs.simplecast.com/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Simplecast
+serviceCategory: Media and Podcasting
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Recurring
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Simplecast
+  ServiceCategory: Media and Podcasting
+  ProviderName: Simplecast
+  PublisherName: Simplecast
+  InvoiceIssuerName: SiriusXM Media
+  BillingCurrency: USD
+  ChargeCategory: Recurring
+  PricingCategory: Subscription
+meters:
+- name: plan_subscription
+  description: Recurring monthly or annual plan subscription fee for the chosen Simplecast tier.
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: monthly_downloads
+  description: Podcast downloads counted against the plan's monthly download allowance.
+  unit: downloads
+  aggregation: sum
+  dimensions:
+  - account
+  - podcast
+- name: team_seats
+  description: Team-member seats included with the plan tier.
+  unit: seats
+  aggregation: max
+  dimensions:
+  - account
+- name: ad_insertion
+  description: Dynamic ad insertion available on Professional and Enterprise tiers; may carry programmatic terms.
+  unit: impressions
+  aggregation: sum
+  dimensions:
+  - account
+  - podcast
+principles:
+- name: Visibility
+  description: Track monthly downloads per podcast against the plan allowance to anticipate tier upgrades before overage.
+- name: Allocation
+  description: Map each podcast/show and team seat to a cost center; on multi-show accounts, allocate the plan fee across shows by download share.
+- name: Optimization
+  description: Right-size the plan to actual download volume and needed analytics depth; only move to Professional/Enterprise when ad insertion, secondary feeds, or API integration are genuinely required.
+- name: Accountability
+  description: Assign an owner for the Simplecast subscription; review the plan tier against download trends and API/ad needs each renewal.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

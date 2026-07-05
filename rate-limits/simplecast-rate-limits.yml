@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Simplecast
+providerId: simplecast
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Podcasting
+- Podcast Analytics
+- Rate Limiting
+- Quotas
+description: >-
+  Simplecast does not publish fixed numeric rate limits for its REST API in the
+  public documentation. The API is bearer-token authenticated and read-oriented.
+  List endpoints are paginated with limit and offset query parameters rather
+  than exposed via a documented per-minute request budget. Clients should treat
+  the API as rate-limited, honor HTTP 429 responses with backoff, and page
+  responses with reasonable limit values.
+notes: >-
+  No per-account or per-endpoint numeric request limits are documented as of the
+  review date. Download and listener volumes are governed by plan-level monthly
+  download allowances (see plans), not by API request quotas. Verify any request
+  throttling behavior empirically or with Simplecast support during
+  reconciliation.
+sources:
+- https://apidocs.simplecast.com/
+- https://help.simplecast.com/hc/en-us/articles/21953603587613-Simplecast-API
+- https://www.simplecast.com/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the Simplecast API.
+- name: List Page Size
+  scope: request
+  metric: objects
+  limit: configurable via limit parameter
+  notes: List endpoints accept limit and offset query parameters to page results.
+- name: Monthly Downloads
+  scope: account
+  metric: downloads
+  limit: per plan
+  notes: Plan tiers cap monthly downloads (e.g. Basic ~20k, Essential ~50k); this is a product allowance, not an API request limit.
+policies:
+- name: Pagination
+  description: Use limit and offset query parameters on list endpoints to page through large collections.
+- name: Backoff Strategy
+  description: On HTTP 429 responses, implement exponential backoff with jitter and honor any Retry-After header before retrying.
+- name: Self-Describing Responses
+  description: Each response returns the actions available to the authenticated user; follow returned links rather than hard-coding paths.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

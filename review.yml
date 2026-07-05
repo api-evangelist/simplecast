@@ -1,0 +1,125 @@
+aid: simplecast
+name: Simplecast
+review:
+  question: Does Simplecast expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Simplecast's documented public surface
+    (https://api.simplecast.com) is request/response REST over HTTPS,
+    authenticated with a bearer token from the dashboard's Private Apps page.
+    There is no server-push transport (WebSocket or SSE) documented on
+    Simplecast's own API to model. The API is predominantly read-only GET, with
+    a small number of writes such as uploading episode audio. Simplecast's
+    real-time-flavored surfaces are RSS feeds (podcast syndication) and
+    embeddable HTML/JS players - neither is a WebSocket API and both are out of
+    scope for an AsyncAPI document.
+findings:
+  summary: |
+    Simplecast does not publish a documented public WebSocket API. Simplecast is
+    a podcast hosting, distribution, and analytics platform owned by SiriusXM
+    Media (acquired 2020). Its public API is a self-describing REST API at
+    https://api.simplecast.com, authenticated with a bearer token generated on
+    the Private Apps page in the Simplecast dashboard (authorization: Bearer
+    {token}). List endpoints paginate with limit and offset. The surface covers
+    podcasts, episodes, audience analytics, and distribution channels, plus
+    metadata resources (categories, keywords, authors, seasons, timezones,
+    oembed, current_user). It is overwhelmingly request/response GET; the one
+    documented write is POST /episodes/{id}/audio to upload episode audio. No
+    realtime, bidirectional, or streaming WebSocket (ws:// or wss://) endpoint
+    is documented anywhere on Simplecast's own API.
+  accessModel: |
+    The API documentation (apidocs.simplecast.com) is public and self-serve to
+    read, but calling the API requires a Simplecast account and a token from the
+    Private Apps page. Simplecast's pricing page lists "API integration" as an
+    Enterprise-tier feature, so full/production API access appears gated to
+    higher tiers even though the documentation is openly published. Endpoints in
+    this catalog are confirmed from Simplecast's official public Postman
+    collection (workspace 10068189, collection T1DsAGJy) surfaced at
+    apidocs.simplecast.com; request/response schemas in the OpenAPI are lightly
+    modeled because Simplecast does not publish a formal schema.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.simplecast.com
+      documented: true
+      note: Bearer-token REST API. Predominantly GET; POST /episodes/{id}/audio for audio upload.
+    - protocol: RSS
+      scheme: https
+      documented: true
+      note: Podcasts expose a generated RSS feed (GET /podcasts/{id}/rss) for syndication. Not a WebSocket.
+    - protocol: Embed
+      scheme: https
+      documented: true
+      note: Embeddable HTML/JS players and oEmbed (GET /oembed). Not a WebSocket API.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Simplecast's API as of the review date.
+  endpointsConfirmedRest:
+    - GET  https://api.simplecast.com/podcasts
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/episodes
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/authors
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/categories
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/categories/{category_id}
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/categories/{category_id}/subcategories
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/keywords
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/seasons
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/rss
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/distribution_channels
+    - GET  https://api.simplecast.com/podcasts/{podcast_id}/distribution_channels/{channel_id}
+    - GET  https://api.simplecast.com/episodes/{episode_id}
+    - GET  https://api.simplecast.com/episodes/{episode_id}/authors
+    - GET  https://api.simplecast.com/episodes/{episode_id}/keywords
+    - GET  https://api.simplecast.com/episodes/{episode_id}/markers
+    - POST https://api.simplecast.com/episodes/{episode_id}/audio
+    - GET  https://api.simplecast.com/seasons/{season_id}
+    - GET  https://api.simplecast.com/seasons/{season_id}/episodes
+    - GET  https://api.simplecast.com/distribution_channels
+    - GET  https://api.simplecast.com/distribution_channels/{channel_id}
+    - GET  https://api.simplecast.com/analytics
+    - GET  https://api.simplecast.com/analytics/downloads
+    - GET  https://api.simplecast.com/analytics/listeners
+    - GET  https://api.simplecast.com/analytics/episodes
+    - GET  https://api.simplecast.com/analytics/episodes/top_10
+    - GET  https://api.simplecast.com/analytics/location
+    - GET  https://api.simplecast.com/analytics/time_of_week
+    - GET  https://api.simplecast.com/analytics/technology
+    - GET  https://api.simplecast.com/analytics/embed
+    - GET  https://api.simplecast.com/categories
+    - GET  https://api.simplecast.com/authors/{author_id}
+    - GET  https://api.simplecast.com/keywords/{keyword_id}
+    - GET  https://api.simplecast.com/links/{link_id}
+    - GET  https://api.simplecast.com/current_user
+    - GET  https://api.simplecast.com/timezones
+    - GET  https://api.simplecast.com/oembed
+sources:
+  - url: https://apidocs.simplecast.com/
+    type: Documentation
+    note: Official API docs (Postman-documenter). Base URL, bearer auth, pagination, endpoint list. All REST; no WebSocket mentioned.
+  - url: https://help.simplecast.com/hc/en-us/articles/21953603587613-Simplecast-API
+    type: Documentation
+    note: Help-center overview of the API and how to obtain a token from Private Apps.
+  - url: https://www.postman.com/simplecast/simplecast-s-public-workspace/documentation/tazgxw7/simplecast-api
+    type: APIReference
+    note: Simplecast's official public Postman workspace and collection (source of the confirmed endpoint list).
+  - url: https://www.simplecast.com/pricing
+    type: Pricing
+    note: Plan tiers; "API integration" listed as an Enterprise feature.
+  - url: https://investor.siriusxm.com/news-events/press-releases/detail/929/siriusxm-acquires-podcast-management-and-analytics-platform
+    type: PressRelease
+    note: SiriusXM acquisition of Simplecast (2020), establishing SiriusXM Media ownership.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Simplecast's own public API is
+    request/response REST (bearer token) plus RSS feeds and embeddable players
+    for distribution/playback. No AsyncAPI document was created because there is
+    no server-push transport on Simplecast's own API to model.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

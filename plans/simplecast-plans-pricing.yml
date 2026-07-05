@@ -1,0 +1,179 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Simplecast
+providerId: simplecast
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Podcasting
+- Podcast Hosting
+- Podcast Distribution
+- Podcast Analytics
+- Plans
+description: >-
+  Simplecast is a subscription podcast hosting, distribution, and analytics
+  platform owned by SiriusXM Media. Published self-serve tiers are billed
+  monthly (with a discount for annual prepay) and are differentiated primarily
+  by monthly download allowance, team seats, and analytics depth. Two higher
+  tiers - Professional and Enterprise - are contact-sales only and add dynamic
+  ad insertion, secondary/white-labeled feeds, priority support, and, notably,
+  API integration (listed as an Enterprise feature). All plans include a 14-day
+  commitment-free trial with no credit card required. Prices below reflect the
+  published pricing page and are not reconciled against a live quote.
+notes: >-
+  The Simplecast REST API (https://api.simplecast.com) uses a bearer token from
+  the dashboard's Private Apps page. Simplecast's pricing page lists "API
+  integration" under the Enterprise tier, so full API access may be gated to
+  higher tiers even though the API documentation is public. Verify current
+  prices, download allowances, and which tier unlocks API access directly with
+  Simplecast / SiriusXM Media sales during reconciliation.
+sources:
+- https://www.simplecast.com/pricing
+- https://www.simplecast.com/
+- https://apidocs.simplecast.com/
+plans:
+- id: simplecast-basic
+  name: Basic
+  type: paid
+  description: >-
+    Entry tier for individual creators. Roughly 20,000 downloads per month,
+    2 team-member seats, unlimited storage, distribution to all major
+    platforms, a custom podcast website, and basic analytics.
+  entries:
+  - label: Monthly Subscription
+    name: basic_monthly
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '15.00'
+    currency: USD
+    userMultiplied: false
+  - label: Monthly Downloads
+    name: basic_downloads
+    type: usage
+    metric: downloads
+    limit: 20000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: 2 Team Seats
+  - name: Unlimited Storage
+  - name: Distribution to All Platforms
+  - name: Custom Website
+  - name: Basic Analytics
+- id: simplecast-essential
+  name: Essential
+  type: paid
+  description: >-
+    Mid tier adding roughly 50,000 downloads per month, 4 team-member seats,
+    additional web players, location analytics, and unique-listener reports.
+  entries:
+  - label: Monthly Subscription
+    name: essential_monthly
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '35.00'
+    currency: USD
+    userMultiplied: false
+  - label: Monthly Downloads
+    name: essential_downloads
+    type: usage
+    metric: downloads
+    limit: 50000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: 4 Team Seats
+  - name: Additional Web Players
+  - name: Location Analytics
+  - name: Unique Listener Reports
+- id: simplecast-growth
+  name: Growth
+  type: paid
+  description: >-
+    Higher self-serve tier for growing shows and small networks (published at
+    roughly 85 USD per month). Builds on Essential with expanded allowances and
+    features. Confirm exact download allowance and inclusions on the pricing
+    page.
+  entries:
+  - label: Monthly Subscription
+    name: growth_monthly
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '85.00'
+    currency: USD
+    userMultiplied: false
+  elements:
+  - name: Expanded Download Allowance
+  - name: More Team Seats
+  - name: Advanced Analytics
+- id: simplecast-professional
+  name: Professional
+  type: enterprise
+  description: >-
+    Contact-sales tier for professional podcasters and brands. Adds dynamic ad
+    insertion with advanced targeting, comprehensive reporting, secondary
+    feeds, priority support, and custom volume show pricing.
+  entries:
+  - label: Custom Agreement
+    name: professional
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Dynamic Ad Insertion
+  - name: Advanced Targeting
+  - name: Secondary Feeds
+  - name: Priority Support
+  - name: Custom Volume Pricing
+- id: simplecast-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Contact-sales tier for networks and large publishers. Everything in
+    Professional plus API integration, white-labeled RSS feeds, high-bitrate
+    audio, a dedicated success manager, and programmatic buyer connections.
+  entries:
+  - label: Custom Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: API Integration
+  - name: White-Labeled RSS Feeds
+  - name: High Bitrate Audio
+  - name: Dedicated Success Manager
+  - name: Programmatic Buyer Connections
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

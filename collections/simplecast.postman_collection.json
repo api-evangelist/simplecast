@@ -1,0 +1,138 @@
+{
+  "info": {
+    "name": "Simplecast API",
+    "description": "Simplecast podcast hosting, distribution, and analytics API. Base URL https://api.simplecast.com. Authenticate with a bearer token from the Private Apps page. List endpoints support limit and offset query parameters.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{token}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "host", "value": "api.simplecast.com" },
+    { "key": "podcast_id", "value": "" },
+    { "key": "episode_id", "value": "" },
+    { "key": "channel_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Podcasts",
+      "item": [
+        {
+          "name": "List podcasts",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/podcasts", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["podcasts"] } }
+        },
+        {
+          "name": "Retrieve a podcast",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/podcasts/:podcast_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["podcasts", ":podcast_id"] } }
+        },
+        {
+          "name": "List episodes for a podcast",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/podcasts/:podcast_id/episodes?limit=12&offset=0", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["podcasts", ":podcast_id", "episodes"], "query": [ { "key": "limit", "value": "12" }, { "key": "offset", "value": "0" } ] } }
+        },
+        {
+          "name": "List podcast categories",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/podcasts/:podcast_id/categories", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["podcasts", ":podcast_id", "categories"] } }
+        },
+        {
+          "name": "List podcast seasons",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/podcasts/:podcast_id/seasons", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["podcasts", ":podcast_id", "seasons"] } }
+        },
+        {
+          "name": "Retrieve podcast RSS feed",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/podcasts/:podcast_id/rss", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["podcasts", ":podcast_id", "rss"] } }
+        }
+      ]
+    },
+    {
+      "name": "Episodes",
+      "item": [
+        {
+          "name": "Retrieve an episode",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/episodes/:episode_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["episodes", ":episode_id"] } }
+        },
+        {
+          "name": "List episode markers",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/episodes/:episode_id/markers", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["episodes", ":episode_id", "markers"] } }
+        },
+        {
+          "name": "List episode keywords",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/episodes/:episode_id/keywords", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["episodes", ":episode_id", "keywords"] } }
+        },
+        {
+          "name": "Upload episode audio",
+          "request": { "method": "POST", "body": { "mode": "formdata", "formdata": [ { "key": "file", "type": "file", "src": [] } ] }, "url": { "raw": "https://api.simplecast.com/episodes/:episode_id/audio", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["episodes", ":episode_id", "audio"] } }
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Overview analytics",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/analytics?podcast=:podcast_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["analytics"], "query": [ { "key": "podcast", "value": ":podcast_id" } ] } }
+        },
+        {
+          "name": "Download analytics",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/analytics/downloads?podcast=:podcast_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["analytics", "downloads"], "query": [ { "key": "podcast", "value": ":podcast_id" } ] } }
+        },
+        {
+          "name": "Listener analytics",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/analytics/listeners?podcast=:podcast_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["analytics", "listeners"], "query": [ { "key": "podcast", "value": ":podcast_id" } ] } }
+        },
+        {
+          "name": "Top 10 episodes",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/analytics/episodes/top_10?podcast=:podcast_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["analytics", "episodes", "top_10"], "query": [ { "key": "podcast", "value": ":podcast_id" } ] } }
+        },
+        {
+          "name": "Location analytics",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/analytics/location?podcast=:podcast_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["analytics", "location"], "query": [ { "key": "podcast", "value": ":podcast_id" } ] } }
+        },
+        {
+          "name": "Technology analytics",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/analytics/technology?podcast=:podcast_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["analytics", "technology"], "query": [ { "key": "podcast", "value": ":podcast_id" } ] } }
+        },
+        {
+          "name": "Embed player analytics",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/analytics/embed?podcast=:podcast_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["analytics", "embed"], "query": [ { "key": "podcast", "value": ":podcast_id" } ] } }
+        }
+      ]
+    },
+    {
+      "name": "Distribution",
+      "item": [
+        {
+          "name": "List distribution channels",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/distribution_channels", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["distribution_channels"] } }
+        },
+        {
+          "name": "Retrieve a distribution channel",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/distribution_channels/:channel_id", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["distribution_channels", ":channel_id"] } }
+        },
+        {
+          "name": "List distribution channels for a podcast",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/podcasts/:podcast_id/distribution_channels", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["podcasts", ":podcast_id", "distribution_channels"] } }
+        }
+      ]
+    },
+    {
+      "name": "Metadata",
+      "item": [
+        {
+          "name": "Current user",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/current_user", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["current_user"] } }
+        },
+        {
+          "name": "List categories",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/categories", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["categories"] } }
+        },
+        {
+          "name": "List timezones",
+          "request": { "method": "GET", "url": { "raw": "https://api.simplecast.com/timezones", "protocol": "https", "host": ["api", "simplecast", "com"], "path": ["timezones"] } }
+        }
+      ]
+    }
+  ]
+}

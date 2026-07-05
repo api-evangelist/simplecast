@@ -1,0 +1,1219 @@
+openapi: 3.0.3
+info:
+  title: Simplecast API
+  description: >-
+    The Simplecast API lets you manage and read your podcasting data on the
+    Simplecast platform - podcasts (shows), episodes, audience analytics, and
+    distribution channels. The API is accessed at https://api.simplecast.com and
+    is self-describing: each response returns the actions available to the
+    authenticated user. Authentication uses a bearer token obtained from the
+    Private Apps page in the Simplecast dashboard (authorization: Bearer {token}).
+    List endpoints support limit and offset query parameters for pagination. The
+    API is predominantly read-only (HTTP GET); a small number of write operations
+    exist, such as uploading episode audio. Simplecast is owned by SiriusXM Media.
+    Endpoint paths in this document are derived from Simplecast's official public
+    Postman collection and API documentation; request and response schemas are
+    lightly modeled where the docs do not publish a formal schema.
+  version: '1.0'
+  contact:
+    name: Simplecast
+    url: https://www.simplecast.com
+servers:
+  - url: https://api.simplecast.com
+    description: Simplecast production API
+security:
+  - bearerAuth: []
+tags:
+  - name: Podcasts
+    description: Podcasts (shows) and their related metadata.
+  - name: Episodes
+    description: Episodes and their authors, keywords, markers, and audio.
+  - name: Analytics
+    description: Audience analytics for podcasts and episodes.
+  - name: Distribution
+    description: Distribution channels a podcast is syndicated to.
+  - name: Metadata
+    description: Account, categories, keywords, authors, and helper resources.
+paths:
+  /podcasts:
+    get:
+      operationId: listPodcasts
+      tags: [Podcasts]
+      summary: List podcasts
+      description: Lists the podcasts (shows) accessible to the authenticated account.
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A paged collection of podcasts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}:
+    get:
+      operationId: getPodcast
+      tags: [Podcasts]
+      summary: Retrieve a podcast
+      description: Retrieves a single podcast by its ID.
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+      responses:
+        '200':
+          description: The requested podcast.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Podcast'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/episodes:
+    get:
+      operationId: listPodcastEpisodes
+      tags: [Podcasts]
+      summary: List episodes for a podcast
+      description: Lists the episodes belonging to the given podcast.
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A paged collection of episodes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/authors:
+    get:
+      operationId: listPodcastAuthors
+      tags: [Podcasts]
+      summary: List authors for a podcast
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+      responses:
+        '200':
+          description: A collection of authors.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/categories:
+    get:
+      operationId: listPodcastCategories
+      tags: [Podcasts]
+      summary: List categories for a podcast
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+      responses:
+        '200':
+          description: A collection of categories.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/categories/{category_id}:
+    get:
+      operationId: getPodcastCategory
+      tags: [Podcasts]
+      summary: Retrieve a podcast category
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+        - $ref: '#/components/parameters/CategoryId'
+      responses:
+        '200':
+          description: The requested category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/categories/{category_id}/subcategories:
+    get:
+      operationId: listPodcastSubcategories
+      tags: [Podcasts]
+      summary: List subcategories for a podcast category
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+        - $ref: '#/components/parameters/CategoryId'
+      responses:
+        '200':
+          description: A collection of subcategories.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/categories/{category_id}/subcategories/{subcategory_id}:
+    get:
+      operationId: getPodcastSubcategory
+      tags: [Podcasts]
+      summary: Retrieve a podcast subcategory
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+        - $ref: '#/components/parameters/CategoryId'
+        - name: subcategory_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested subcategory.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/keywords:
+    get:
+      operationId: listPodcastKeywords
+      tags: [Podcasts]
+      summary: List keywords for a podcast
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+      responses:
+        '200':
+          description: A collection of keywords.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/keywords/{keyword_id}:
+    get:
+      operationId: getPodcastKeyword
+      tags: [Podcasts]
+      summary: Retrieve a podcast keyword
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+        - $ref: '#/components/parameters/KeywordId'
+      responses:
+        '200':
+          description: The requested keyword.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/seasons:
+    get:
+      operationId: listPodcastSeasons
+      tags: [Podcasts]
+      summary: List seasons for a podcast
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+      responses:
+        '200':
+          description: A collection of seasons.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/rss:
+    get:
+      operationId: getPodcastRss
+      tags: [Podcasts]
+      summary: Retrieve a podcast RSS feed
+      description: Returns the generated RSS feed for the podcast.
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+      responses:
+        '200':
+          description: The podcast RSS feed.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/distribution_channels:
+    get:
+      operationId: listPodcastDistributionChannels
+      tags: [Distribution]
+      summary: List distribution channels for a podcast
+      description: Lists the distribution channels the podcast is syndicated to.
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+      responses:
+        '200':
+          description: A collection of distribution channels.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/distribution_channels/{channel_id}:
+    get:
+      operationId: getPodcastDistributionChannel
+      tags: [Distribution]
+      summary: Retrieve a distribution channel for a podcast
+      parameters:
+        - $ref: '#/components/parameters/PodcastId'
+        - $ref: '#/components/parameters/ChannelId'
+      responses:
+        '200':
+          description: The requested distribution channel.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /distribution_channels:
+    get:
+      operationId: listDistributionChannels
+      tags: [Distribution]
+      summary: List distribution channels
+      responses:
+        '200':
+          description: A collection of distribution channels.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /distribution_channels/{channel_id}:
+    get:
+      operationId: getDistributionChannel
+      tags: [Distribution]
+      summary: Retrieve a distribution channel
+      parameters:
+        - $ref: '#/components/parameters/ChannelId'
+      responses:
+        '200':
+          description: The requested distribution channel.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /episodes/{episode_id}:
+    get:
+      operationId: getEpisode
+      tags: [Episodes]
+      summary: Retrieve an episode
+      parameters:
+        - $ref: '#/components/parameters/EpisodeId'
+      responses:
+        '200':
+          description: The requested episode.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Episode'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /episodes/{episode_id}/authors:
+    get:
+      operationId: listEpisodeAuthors
+      tags: [Episodes]
+      summary: List authors for an episode
+      parameters:
+        - $ref: '#/components/parameters/EpisodeId'
+      responses:
+        '200':
+          description: A collection of authors.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /episodes/{episode_id}/keywords:
+    get:
+      operationId: listEpisodeKeywords
+      tags: [Episodes]
+      summary: List keywords for an episode
+      parameters:
+        - $ref: '#/components/parameters/EpisodeId'
+      responses:
+        '200':
+          description: A collection of keywords.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /episodes/{episode_id}/keywords/{keyword_id}:
+    get:
+      operationId: getEpisodeKeyword
+      tags: [Episodes]
+      summary: Retrieve an episode keyword
+      parameters:
+        - $ref: '#/components/parameters/EpisodeId'
+        - $ref: '#/components/parameters/KeywordId'
+      responses:
+        '200':
+          description: The requested keyword.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /episodes/{episode_id}/markers:
+    get:
+      operationId: listEpisodeMarkers
+      tags: [Episodes]
+      summary: List markers for an episode
+      description: Lists the chapter markers defined on the episode.
+      parameters:
+        - $ref: '#/components/parameters/EpisodeId'
+      responses:
+        '200':
+          description: A collection of markers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /episodes/{episode_id}/markers/{marker_id}:
+    get:
+      operationId: getEpisodeMarker
+      tags: [Episodes]
+      summary: Retrieve an episode marker
+      parameters:
+        - $ref: '#/components/parameters/EpisodeId'
+        - name: marker_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested marker.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /episodes/{episode_id}/audio:
+    post:
+      operationId: uploadEpisodeAudio
+      tags: [Episodes]
+      summary: Upload episode audio
+      description: Uploads the audio file for an episode.
+      parameters:
+        - $ref: '#/components/parameters/EpisodeId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: The audio upload was accepted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /seasons/{season_id}:
+    get:
+      operationId: getSeason
+      tags: [Podcasts]
+      summary: Retrieve a season
+      parameters:
+        - $ref: '#/components/parameters/SeasonId'
+      responses:
+        '200':
+          description: The requested season.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /seasons/{season_id}/episodes:
+    get:
+      operationId: listSeasonEpisodes
+      tags: [Podcasts]
+      summary: List episodes in a season
+      parameters:
+        - $ref: '#/components/parameters/SeasonId'
+      responses:
+        '200':
+          description: A collection of episodes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics:
+    get:
+      operationId: getAnalytics
+      tags: [Analytics]
+      summary: Retrieve overview analytics
+      description: Returns overview analytics, scoped by a podcast query parameter.
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Analytics data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/downloads:
+    get:
+      operationId: getAnalyticsDownloads
+      tags: [Analytics]
+      summary: Retrieve download analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Download analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/listeners:
+    get:
+      operationId: getAnalyticsListeners
+      tags: [Analytics]
+      summary: Retrieve listener analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Listener analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/listeners/last_7:
+    get:
+      operationId: getAnalyticsListenersLast7
+      tags: [Analytics]
+      summary: Retrieve listeners over the last 7 days
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Listener analytics for the last seven days.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/episodes:
+    get:
+      operationId: getAnalyticsEpisodes
+      tags: [Analytics]
+      summary: Retrieve episode analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Episode analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/episodes/average_downloads:
+    get:
+      operationId: getAnalyticsEpisodesAverageDownloads
+      tags: [Analytics]
+      summary: Retrieve average downloads per episode
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Average downloads analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/episodes/hours_listened:
+    get:
+      operationId: getAnalyticsEpisodesHoursListened
+      tags: [Analytics]
+      summary: Retrieve hours listened per episode
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Hours listened analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/episodes/listeners:
+    get:
+      operationId: getAnalyticsEpisodesListeners
+      tags: [Analytics]
+      summary: Retrieve listeners per episode
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Episode listener analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/episodes/top_10:
+    get:
+      operationId: getAnalyticsEpisodesTop10
+      tags: [Analytics]
+      summary: Retrieve the top 10 episodes
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Top episodes analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/podcasts/listeners:
+    get:
+      operationId: getAnalyticsPodcastsListeners
+      tags: [Analytics]
+      summary: Retrieve podcast-level listener analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Podcast listener analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/location:
+    get:
+      operationId: getAnalyticsLocation
+      tags: [Analytics]
+      summary: Retrieve location analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Location analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/time_of_week:
+    get:
+      operationId: getAnalyticsTimeOfWeek
+      tags: [Analytics]
+      summary: Retrieve time-of-week analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Time-of-week analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/campaigns/{campaign_id}:
+    get:
+      operationId: getAnalyticsCampaign
+      tags: [Analytics]
+      summary: Retrieve campaign analytics
+      parameters:
+        - name: campaign_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Campaign analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology:
+    get:
+      operationId: getAnalyticsTechnology
+      tags: [Analytics]
+      summary: Retrieve technology analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Technology analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology/applications:
+    get:
+      operationId: getAnalyticsTechnologyApplications
+      tags: [Analytics]
+      summary: Retrieve listening-application analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Application analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology/browsers:
+    get:
+      operationId: getAnalyticsTechnologyBrowsers
+      tags: [Analytics]
+      summary: Retrieve browser analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Browser analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology/device_class:
+    get:
+      operationId: getAnalyticsTechnologyDeviceClass
+      tags: [Analytics]
+      summary: Retrieve device-class analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Device-class analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology/devices:
+    get:
+      operationId: getAnalyticsTechnologyDevices
+      tags: [Analytics]
+      summary: Retrieve device analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Device analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology/listening_methods:
+    get:
+      operationId: getAnalyticsTechnologyListeningMethods
+      tags: [Analytics]
+      summary: Retrieve listening-method analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Listening-method analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology/network_types:
+    get:
+      operationId: getAnalyticsTechnologyNetworkTypes
+      tags: [Analytics]
+      summary: Retrieve network-type analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Network-type analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology/operating_systems:
+    get:
+      operationId: getAnalyticsTechnologyOperatingSystems
+      tags: [Analytics]
+      summary: Retrieve operating-system analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Operating-system analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology/providers:
+    get:
+      operationId: getAnalyticsTechnologyProviders
+      tags: [Analytics]
+      summary: Retrieve provider analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Provider analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/technology/web_players:
+    get:
+      operationId: getAnalyticsTechnologyWebPlayers
+      tags: [Analytics]
+      summary: Retrieve web-player analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Web-player analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/embed:
+    get:
+      operationId: getAnalyticsEmbed
+      tags: [Analytics]
+      summary: Retrieve embed-player analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Embed analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/embed/avg_completion:
+    get:
+      operationId: getAnalyticsEmbedAvgCompletion
+      tags: [Analytics]
+      summary: Retrieve average completion for the embed player
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Average completion analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/embed/episodes:
+    get:
+      operationId: getAnalyticsEmbedEpisodes
+      tags: [Analytics]
+      summary: Retrieve embed-player analytics by episode
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Embed episode analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/embed/heatmap:
+    get:
+      operationId: getAnalyticsEmbedHeatmap
+      tags: [Analytics]
+      summary: Retrieve embed-player heatmap analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Heatmap analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/embed/listens:
+    get:
+      operationId: getAnalyticsEmbedListens
+      tags: [Analytics]
+      summary: Retrieve embed-player listens
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Listens analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/embed/locations:
+    get:
+      operationId: getAnalyticsEmbedLocations
+      tags: [Analytics]
+      summary: Retrieve embed-player location analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Location analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /analytics/embed/speeds:
+    get:
+      operationId: getAnalyticsEmbedSpeeds
+      tags: [Analytics]
+      summary: Retrieve embed-player playback-speed analytics
+      parameters:
+        - $ref: '#/components/parameters/PodcastQuery'
+      responses:
+        '200':
+          description: Playback-speed analytics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /categories:
+    get:
+      operationId: listCategories
+      tags: [Metadata]
+      summary: List categories
+      responses:
+        '200':
+          description: A collection of categories.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /authors/{author_id}:
+    get:
+      operationId: getAuthor
+      tags: [Metadata]
+      summary: Retrieve an author
+      parameters:
+        - name: author_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested author.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /keywords/{keyword_id}:
+    get:
+      operationId: getKeyword
+      tags: [Metadata]
+      summary: Retrieve a keyword
+      parameters:
+        - $ref: '#/components/parameters/KeywordId'
+      responses:
+        '200':
+          description: The requested keyword.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /links/{link_id}:
+    get:
+      operationId: getLink
+      tags: [Metadata]
+      summary: Retrieve a link
+      parameters:
+        - name: link_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested link.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /current_user:
+    get:
+      operationId: getCurrentUser
+      tags: [Metadata]
+      summary: Retrieve the current user
+      description: Returns information about the authenticated user.
+      responses:
+        '200':
+          description: The current user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /timezones:
+    get:
+      operationId: listTimezones
+      tags: [Metadata]
+      summary: List timezones
+      responses:
+        '200':
+          description: A collection of timezones.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /oembed:
+    get:
+      operationId: getOembed
+      tags: [Metadata]
+      summary: Retrieve oEmbed data
+      description: Returns oEmbed data for a Simplecast resource URL.
+      parameters:
+        - name: url
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: oEmbed response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Bearer token generated from the Private Apps page in the Simplecast
+        dashboard. Sent as "authorization: Bearer {token}".
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of objects to return.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Index at which to start the page of results.
+      schema:
+        type: integer
+    PodcastId:
+      name: podcast_id
+      in: path
+      required: true
+      schema:
+        type: string
+    EpisodeId:
+      name: episode_id
+      in: path
+      required: true
+      schema:
+        type: string
+    CategoryId:
+      name: category_id
+      in: path
+      required: true
+      schema:
+        type: string
+    KeywordId:
+      name: keyword_id
+      in: path
+      required: true
+      schema:
+        type: string
+    ChannelId:
+      name: channel_id
+      in: path
+      required: true
+      schema:
+        type: string
+    SeasonId:
+      name: season_id
+      in: path
+      required: true
+      schema:
+        type: string
+    PodcastQuery:
+      name: podcast
+      in: query
+      required: false
+      description: The podcast ID to scope the analytics query to.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Collection:
+      type: object
+      description: A paged collection of resources. Fields are modeled; the API is self-describing.
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        pages:
+          type: object
+          properties:
+            total:
+              type: integer
+            limit:
+              type: integer
+            offset:
+              type: integer
+    Resource:
+      type: object
+      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
+      properties:
+        id:
+          type: string
+        href:
+          type: string
+    Podcast:
+      type: object
+      description: A podcast (show). Fields are modeled from documented responses.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        author:
+          type: string
+        href:
+          type: string
+    Episode:
+      type: object
+      description: An episode. Fields are modeled from documented responses.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        number:
+          type: integer
+        season:
+          type: object
+        published_at:
+          type: string
+          format: date-time
+        href:
+          type: string
+    Analytics:
+      type: object
+      description: An analytics result. Shape varies by analytics endpoint; modeled generically.
+      properties:
+        id:
+          type: string
+        downloads:
+          type: object
+        by_interval:
+          type: array
+          items:
+            type: object
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
