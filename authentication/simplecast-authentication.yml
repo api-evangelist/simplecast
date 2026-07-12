@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/simplecast-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'Bearer token generated from the Private Apps page in the Simplecast dashboard.
+    Sent as "authorization: Bearer {token}".'
+  sources:
+  - openapi/simplecast-openapi.yml

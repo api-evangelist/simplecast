@@ -123,6 +123,10 @@ apis:
     the distribution channels a given podcast is syndicated to (Apple Podcasts,
     Spotify, and other destinations). Read-only view of where shows are published.
 common:
+- type: DomainSecurity
+  url: security/simplecast-domain-security.yml
+- type: Authentication
+  url: authentication/simplecast-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/simplecast
 - type: Website
