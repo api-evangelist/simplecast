@@ -1,0 +1,642 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/simplecast-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 62
+  by_action_class:
+    connected: 61
+    acting: 1
+  by_consequence:
+    read: 61
+    write: 1
+  human_in_the_loop_required: 0
+operations:
+- path: /podcasts
+  method: get
+  operationId: listPodcasts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}
+  method: get
+  operationId: getPodcast
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/episodes
+  method: get
+  operationId: listPodcastEpisodes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/authors
+  method: get
+  operationId: listPodcastAuthors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/categories
+  method: get
+  operationId: listPodcastCategories
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/categories/{category_id}
+  method: get
+  operationId: getPodcastCategory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/categories/{category_id}/subcategories
+  method: get
+  operationId: listPodcastSubcategories
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/categories/{category_id}/subcategories/{subcategory_id}
+  method: get
+  operationId: getPodcastSubcategory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/keywords
+  method: get
+  operationId: listPodcastKeywords
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/keywords/{keyword_id}
+  method: get
+  operationId: getPodcastKeyword
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/seasons
+  method: get
+  operationId: listPodcastSeasons
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/rss
+  method: get
+  operationId: getPodcastRss
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/distribution_channels
+  method: get
+  operationId: listPodcastDistributionChannels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /podcasts/{podcast_id}/distribution_channels/{channel_id}
+  method: get
+  operationId: getPodcastDistributionChannel
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /distribution_channels
+  method: get
+  operationId: listDistributionChannels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /distribution_channels/{channel_id}
+  method: get
+  operationId: getDistributionChannel
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /episodes/{episode_id}
+  method: get
+  operationId: getEpisode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /episodes/{episode_id}/authors
+  method: get
+  operationId: listEpisodeAuthors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /episodes/{episode_id}/keywords
+  method: get
+  operationId: listEpisodeKeywords
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /episodes/{episode_id}/keywords/{keyword_id}
+  method: get
+  operationId: getEpisodeKeyword
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /episodes/{episode_id}/markers
+  method: get
+  operationId: listEpisodeMarkers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /episodes/{episode_id}/markers/{marker_id}
+  method: get
+  operationId: getEpisodeMarker
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /episodes/{episode_id}/audio
+  method: post
+  operationId: uploadEpisodeAudio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /seasons/{season_id}
+  method: get
+  operationId: getSeason
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /seasons/{season_id}/episodes
+  method: get
+  operationId: listSeasonEpisodes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics
+  method: get
+  operationId: getAnalytics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/downloads
+  method: get
+  operationId: getAnalyticsDownloads
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/listeners
+  method: get
+  operationId: getAnalyticsListeners
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/listeners/last_7
+  method: get
+  operationId: getAnalyticsListenersLast7
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/episodes
+  method: get
+  operationId: getAnalyticsEpisodes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/episodes/average_downloads
+  method: get
+  operationId: getAnalyticsEpisodesAverageDownloads
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/episodes/hours_listened
+  method: get
+  operationId: getAnalyticsEpisodesHoursListened
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/episodes/listeners
+  method: get
+  operationId: getAnalyticsEpisodesListeners
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/episodes/top_10
+  method: get
+  operationId: getAnalyticsEpisodesTop10
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/podcasts/listeners
+  method: get
+  operationId: getAnalyticsPodcastsListeners
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/location
+  method: get
+  operationId: getAnalyticsLocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/time_of_week
+  method: get
+  operationId: getAnalyticsTimeOfWeek
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/campaigns/{campaign_id}
+  method: get
+  operationId: getAnalyticsCampaign
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology
+  method: get
+  operationId: getAnalyticsTechnology
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology/applications
+  method: get
+  operationId: getAnalyticsTechnologyApplications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology/browsers
+  method: get
+  operationId: getAnalyticsTechnologyBrowsers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology/device_class
+  method: get
+  operationId: getAnalyticsTechnologyDeviceClass
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology/devices
+  method: get
+  operationId: getAnalyticsTechnologyDevices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology/listening_methods
+  method: get
+  operationId: getAnalyticsTechnologyListeningMethods
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology/network_types
+  method: get
+  operationId: getAnalyticsTechnologyNetworkTypes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology/operating_systems
+  method: get
+  operationId: getAnalyticsTechnologyOperatingSystems
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology/providers
+  method: get
+  operationId: getAnalyticsTechnologyProviders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/technology/web_players
+  method: get
+  operationId: getAnalyticsTechnologyWebPlayers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/embed
+  method: get
+  operationId: getAnalyticsEmbed
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/embed/avg_completion
+  method: get
+  operationId: getAnalyticsEmbedAvgCompletion
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/embed/episodes
+  method: get
+  operationId: getAnalyticsEmbedEpisodes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/embed/heatmap
+  method: get
+  operationId: getAnalyticsEmbedHeatmap
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/embed/listens
+  method: get
+  operationId: getAnalyticsEmbedListens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/embed/locations
+  method: get
+  operationId: getAnalyticsEmbedLocations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/embed/speeds
+  method: get
+  operationId: getAnalyticsEmbedSpeeds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /categories
+  method: get
+  operationId: listCategories
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /authors/{author_id}
+  method: get
+  operationId: getAuthor
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /keywords/{keyword_id}
+  method: get
+  operationId: getKeyword
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /links/{link_id}
+  method: get
+  operationId: getLink
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /current_user
+  method: get
+  operationId: getCurrentUser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /timezones
+  method: get
+  operationId: listTimezones
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /oembed
+  method: get
+  operationId: getOembed
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
