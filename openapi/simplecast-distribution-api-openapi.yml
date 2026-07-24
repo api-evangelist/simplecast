@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Simplecast Analytics Distribution API
+  description: 'The Simplecast API lets you manage and read your podcasting data on the Simplecast platform - podcasts (shows), episodes, audience analytics, and distribution channels. The API is accessed at https://api.simplecast.com and is self-describing: each response returns the actions available to the authenticated user. Authentication uses a bearer token obtained from the Private Apps page in the Simplecast dashboard (authorization: Bearer {token}). List endpoints support limit and offset query parameters for pagination. The API is predominantly read-only (HTTP GET); a small number of write operations exist, such as uploading episode audio. Simplecast is owned by SiriusXM Media. Endpoint paths in this document are derived from Simplecast''s official public Postman collection and API documentation; request and response schemas are lightly modeled where the docs do not publish a formal schema.'
+  version: '1.0'
+  contact:
+    name: Simplecast
+    url: https://www.simplecast.com
+servers:
+- url: https://api.simplecast.com
+  description: Simplecast production API
+security:
+- bearerAuth: []
+tags:
+- name: Distribution
+  description: Distribution channels a podcast is syndicated to.
+paths:
+  /podcasts/{podcast_id}/distribution_channels:
+    get:
+      operationId: listPodcastDistributionChannels
+      tags:
+      - Distribution
+      summary: List distribution channels for a podcast
+      description: Lists the distribution channels the podcast is syndicated to.
+      parameters:
+      - $ref: '#/components/parameters/PodcastId'
+      responses:
+        '200':
+          description: A collection of distribution channels.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /podcasts/{podcast_id}/distribution_channels/{channel_id}:
+    get:
+      operationId: getPodcastDistributionChannel
+      tags:
+      - Distribution
+      summary: Retrieve a distribution channel for a podcast
+      parameters:
+      - $ref: '#/components/parameters/PodcastId'
+      - $ref: '#/components/parameters/ChannelId'
+      responses:
+        '200':
+          description: The requested distribution channel.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /distribution_channels:
+    get:
+      operationId: listDistributionChannels
+      tags:
+      - Distribution
+      summary: List distribution channels
+      responses:
+        '200':
+          description: A collection of distribution channels.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /distribution_channels/{channel_id}:
+    get:
+      operationId: getDistributionChannel
+      tags:
+      - Distribution
+      summary: Retrieve a distribution channel
+      parameters:
+      - $ref: '#/components/parameters/ChannelId'
+      responses:
+        '200':
+          description: The requested distribution channel.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    ChannelId:
+      name: channel_id
+      in: path
+      required: true
+      schema:
+        type: string
+    PodcastId:
+      name: podcast_id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Collection:
+      type: object
+      description: A paged collection of resources. Fields are modeled; the API is self-describing.
+      properties:
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        pages:
+          type: object
+          properties:
+            total:
+              type: integer
+            limit:
+              type: integer
+            offset:
+              type: integer
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Resource:
+      type: object
+      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
+      properties:
+        id:
+          type: string
+        href:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Bearer token generated from the Private Apps page in the Simplecast dashboard. Sent as "authorization: Bearer {token}".'
