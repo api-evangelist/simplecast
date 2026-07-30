@@ -14,7 +14,20 @@ description: Simplecast is a podcast hosting, distribution, and analytics platfo
   authenticated user - with a small number of write operations such as uploading
   episode audio. Access requires a Simplecast account; broader API integration is
   positioned as part of the higher-tier (Professional / Enterprise) plans.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: open
+  trial: true
+  try_now: true
+  public: true
+  label: Paid (free trial) · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/simplecast.png
 tags:
 - Podcasting
 - Podcast Hosting
@@ -27,101 +40,96 @@ created: '2026-07-05'
 modified: '2026-07-05'
 specificationVersion: '0.19'
 apis:
-- aid: simplecast:simplecast-podcasts-api
-  name: Simplecast Podcasts API
-  tags:
-  - Podcasts
-  - Shows
-  - Metadata
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://apidocs.simplecast.com/
-  baseURL: https://api.simplecast.com
-  properties:
-  - url: https://apidocs.simplecast.com/
-    type: Documentation
-  - url: https://apidocs.simplecast.com/
-    type: APIReference
-  - url: openapi/simplecast-openapi.yml
-    type: OpenAPI
-  - url: collections/simplecast.postman_collection.json
-    type: PostmanCollection
-  - url: collections/simplecast.opencollection.json
-    type: OpenCollection
-  description: List and retrieve podcasts (shows) in the authenticated account and
-    read their related metadata - authors, categories and subcategories, keywords,
-    seasons, distribution channels, and the generated RSS feed. Read-only over the
-    podcasts and their nested collections.
-- aid: simplecast:simplecast-episodes-api
-  name: Simplecast Episodes API
-  tags:
-  - Episodes
-  - Audio
-  - Markers
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://apidocs.simplecast.com/
-  baseURL: https://api.simplecast.com
-  properties:
-  - url: https://apidocs.simplecast.com/
-    type: Documentation
-  - url: https://apidocs.simplecast.com/
-    type: APIReference
-  - url: openapi/simplecast-openapi.yml
-    type: OpenAPI
-  - url: collections/simplecast.postman_collection.json
-    type: PostmanCollection
-  - url: collections/simplecast.opencollection.json
-    type: OpenCollection
-  description: List a podcast's episodes and retrieve individual episodes with their
-    authors, keywords, and chapter markers, plus the seasons an episode belongs to.
-    Supports uploading episode audio via a POST to the episode audio endpoint.
 - aid: simplecast:simplecast-analytics-api
   name: Simplecast Analytics API
+  description: Audience analytics for podcasts and episodes.
+  humanURL: https://apidocs.simplecast.com/
+  baseURL: https://api.simplecast.com
   tags:
   - Analytics
-  - Downloads
-  - Listeners
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://apidocs.simplecast.com/
-  baseURL: https://api.simplecast.com
   properties:
-  - url: https://apidocs.simplecast.com/
-    type: Documentation
-  - url: https://apidocs.simplecast.com/
-    type: APIReference
-  - url: openapi/simplecast-openapi.yml
-    type: OpenAPI
-  - url: collections/simplecast.postman_collection.json
-    type: PostmanCollection
-  - url: collections/simplecast.opencollection.json
-    type: OpenCollection
-  description: Read audience analytics for podcasts and episodes - downloads,
-    listeners, hours listened, top episodes, geographic location, time of week,
-    listening technology (applications, browsers, devices, operating systems, web
-    players, network types), campaigns, and embeddable-player analytics such as
-    listens, locations, speeds, heatmap, and average completion.
+  - type: OpenAPI
+    url: openapi/simplecast-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.simplecast.com/
+  - type: APIReference
+    url: https://apidocs.simplecast.com/
+  - type: PostmanCollection
+    url: collections/simplecast.postman_collection.json
+  - type: OpenCollection
+    url: collections/simplecast.opencollection.json
 - aid: simplecast:simplecast-distribution-api
   name: Simplecast Distribution API
-  tags:
-  - Distribution
-  - Channels
-  - Syndication
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Distribution channels a podcast is syndicated to.
   humanURL: https://apidocs.simplecast.com/
   baseURL: https://api.simplecast.com
+  tags:
+  - Distribution
   properties:
-  - url: https://apidocs.simplecast.com/
-    type: Documentation
-  - url: https://apidocs.simplecast.com/
-    type: APIReference
-  - url: openapi/simplecast-openapi.yml
-    type: OpenAPI
-  - url: collections/simplecast.postman_collection.json
-    type: PostmanCollection
-  - url: collections/simplecast.opencollection.json
-    type: OpenCollection
-  description: List distribution channels and retrieve a specific channel, and read
-    the distribution channels a given podcast is syndicated to (Apple Podcasts,
-    Spotify, and other destinations). Read-only view of where shows are published.
+  - type: OpenAPI
+    url: openapi/simplecast-distribution-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.simplecast.com/
+  - type: APIReference
+    url: https://apidocs.simplecast.com/
+  - type: PostmanCollection
+    url: collections/simplecast.postman_collection.json
+  - type: OpenCollection
+    url: collections/simplecast.opencollection.json
+- aid: simplecast:simplecast-episodes-api
+  name: Simplecast Episodes API
+  description: Episodes and their authors, keywords, markers, and audio.
+  humanURL: https://apidocs.simplecast.com/
+  baseURL: https://api.simplecast.com
+  tags:
+  - Episodes
+  properties:
+  - type: OpenAPI
+    url: openapi/simplecast-episodes-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.simplecast.com/
+  - type: APIReference
+    url: https://apidocs.simplecast.com/
+  - type: PostmanCollection
+    url: collections/simplecast.postman_collection.json
+  - type: OpenCollection
+    url: collections/simplecast.opencollection.json
+- aid: simplecast:simplecast-metadata-api
+  name: Simplecast Metadata API
+  description: Account, categories, keywords, authors, and helper resources.
+  humanURL: https://apidocs.simplecast.com/
+  baseURL: https://api.simplecast.com
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/simplecast-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.simplecast.com/
+  - type: APIReference
+    url: https://apidocs.simplecast.com/
+  - type: PostmanCollection
+    url: collections/simplecast.postman_collection.json
+  - type: OpenCollection
+    url: collections/simplecast.opencollection.json
+- aid: simplecast:simplecast-podcasts-api
+  name: Simplecast Podcasts API
+  description: Podcasts (shows) and their related metadata.
+  humanURL: https://apidocs.simplecast.com/
+  baseURL: https://api.simplecast.com
+  tags:
+  - Podcasts
+  properties:
+  - type: OpenAPI
+    url: openapi/simplecast-podcasts-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.simplecast.com/
+  - type: APIReference
+    url: https://apidocs.simplecast.com/
+  - type: PostmanCollection
+    url: collections/simplecast.postman_collection.json
+  - type: OpenCollection
+    url: collections/simplecast.opencollection.json
 common:
 - type: AgenticAccess
   url: agentic-access/simplecast-agentic-access.yml
