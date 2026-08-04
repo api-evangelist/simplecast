@@ -1,0 +1,22 @@
+{
+  "provider": "simplecast",
+  "sources": [
+    "simplecast-analytics-api-openapi.yml",
+    "simplecast-distribution-api-openapi.yml",
+    "simplecast-episodes-api-openapi.yml",
+    "simplecast-metadata-api-openapi.yml",
+    "simplecast-podcasts-api-openapi.yml"
+  ],
+  "outputs": [
+    "simplecast-analytics-api-openapi.yml",
+    "simplecast-distribution-api-openapi.yml",
+    "simplecast-episodes-api-openapi.yml",
+    "simplecast-metadata-api-openapi.yml",
+    "simplecast-podcasts-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
