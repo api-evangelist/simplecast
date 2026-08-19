@@ -1,0 +1,170 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Simplecast Analytics Episodes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Episodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/episodes/:episode_id",
+            "params": [
+              {
+                "name": "episode_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an episode"
+        },
+        {
+          "info": {
+            "name": "List authors for an episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/episodes/:episode_id/authors",
+            "params": [
+              {
+                "name": "episode_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List authors for an episode"
+        },
+        {
+          "info": {
+            "name": "List keywords for an episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/episodes/:episode_id/keywords",
+            "params": [
+              {
+                "name": "episode_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List keywords for an episode"
+        },
+        {
+          "info": {
+            "name": "Retrieve an episode keyword",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/episodes/:episode_id/keywords/:keyword_id",
+            "params": [
+              {
+                "name": "episode_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "keyword_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an episode keyword"
+        },
+        {
+          "info": {
+            "name": "List markers for an episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/episodes/:episode_id/markers",
+            "params": [
+              {
+                "name": "episode_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists the chapter markers defined on the episode."
+        },
+        {
+          "info": {
+            "name": "Retrieve an episode marker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/episodes/:episode_id/markers/:marker_id",
+            "params": [
+              {
+                "name": "episode_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "marker_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an episode marker"
+        },
+        {
+          "info": {
+            "name": "Upload episode audio",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.simplecast.com/episodes/:episode_id/audio",
+            "params": [
+              {
+                "name": "episode_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads the audio file for an episode."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

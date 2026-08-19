@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Simplecast Analytics Distribution API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Distribution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List distribution channels for a podcast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/distribution_channels",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists the distribution channels the podcast is syndicated to."
+        },
+        {
+          "info": {
+            "name": "Retrieve a distribution channel for a podcast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/distribution_channels/:channel_id",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a distribution channel for a podcast"
+        },
+        {
+          "info": {
+            "name": "List distribution channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/distribution_channels"
+          },
+          "docs": "List distribution channels"
+        },
+        {
+          "info": {
+            "name": "Retrieve a distribution channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/distribution_channels/:channel_id",
+            "params": [
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a distribution channel"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,320 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Simplecast Analytics Podcasts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Podcasts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List podcasts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index at which to start the page of results."
+              }
+            ]
+          },
+          "docs": "Lists the podcasts (shows) accessible to the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Retrieve a podcast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a single podcast by its ID."
+        },
+        {
+          "info": {
+            "name": "List episodes for a podcast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/episodes",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Index at which to start the page of results."
+              }
+            ]
+          },
+          "docs": "Lists the episodes belonging to the given podcast."
+        },
+        {
+          "info": {
+            "name": "List authors for a podcast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/authors",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List authors for a podcast"
+        },
+        {
+          "info": {
+            "name": "List categories for a podcast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/categories",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List categories for a podcast"
+        },
+        {
+          "info": {
+            "name": "Retrieve a podcast category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/categories/:category_id",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a podcast category"
+        },
+        {
+          "info": {
+            "name": "List subcategories for a podcast category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/categories/:category_id/subcategories",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List subcategories for a podcast category"
+        },
+        {
+          "info": {
+            "name": "Retrieve a podcast subcategory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/categories/:category_id/subcategories/:subcategory_id",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "subcategory_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a podcast subcategory"
+        },
+        {
+          "info": {
+            "name": "List keywords for a podcast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/keywords",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List keywords for a podcast"
+        },
+        {
+          "info": {
+            "name": "Retrieve a podcast keyword",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/keywords/:keyword_id",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "keyword_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a podcast keyword"
+        },
+        {
+          "info": {
+            "name": "List seasons for a podcast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/seasons",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List seasons for a podcast"
+        },
+        {
+          "info": {
+            "name": "Retrieve a podcast RSS feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/podcasts/:podcast_id/rss",
+            "params": [
+              {
+                "name": "podcast_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the generated RSS feed for the podcast."
+        },
+        {
+          "info": {
+            "name": "Retrieve a season",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/seasons/:season_id",
+            "params": [
+              {
+                "name": "season_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a season"
+        },
+        {
+          "info": {
+            "name": "List episodes in a season",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/seasons/:season_id/episodes",
+            "params": [
+              {
+                "name": "season_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List episodes in a season"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

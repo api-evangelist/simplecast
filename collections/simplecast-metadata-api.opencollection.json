@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Simplecast Analytics Metadata API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/categories"
+          },
+          "docs": "List categories"
+        },
+        {
+          "info": {
+            "name": "Retrieve an author",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/authors/:author_id",
+            "params": [
+              {
+                "name": "author_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an author"
+        },
+        {
+          "info": {
+            "name": "Retrieve a keyword",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/keywords/:keyword_id",
+            "params": [
+              {
+                "name": "keyword_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a keyword"
+        },
+        {
+          "info": {
+            "name": "Retrieve a link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/links/:link_id",
+            "params": [
+              {
+                "name": "link_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a link"
+        },
+        {
+          "info": {
+            "name": "Retrieve the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/current_user"
+          },
+          "docs": "Returns information about the authenticated user."
+        },
+        {
+          "info": {
+            "name": "List timezones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/timezones"
+          },
+          "docs": "List timezones"
+        },
+        {
+          "info": {
+            "name": "Retrieve oEmbed data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/oembed",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns oEmbed data for a Simplecast resource URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

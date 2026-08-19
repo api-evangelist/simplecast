@@ -1,0 +1,593 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Simplecast Analytics API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve overview analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Returns overview analytics, scoped by a podcast query parameter."
+        },
+        {
+          "info": {
+            "name": "Retrieve download analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/downloads",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve download analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve listener analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/listeners",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve listener analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve listeners over the last 7 days",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/listeners/last_7",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve listeners over the last 7 days"
+        },
+        {
+          "info": {
+            "name": "Retrieve episode analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/episodes",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve episode analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve average downloads per episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/episodes/average_downloads",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve average downloads per episode"
+        },
+        {
+          "info": {
+            "name": "Retrieve hours listened per episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/episodes/hours_listened",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve hours listened per episode"
+        },
+        {
+          "info": {
+            "name": "Retrieve listeners per episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/episodes/listeners",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve listeners per episode"
+        },
+        {
+          "info": {
+            "name": "Retrieve the top 10 episodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/episodes/top_10",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve the top 10 episodes"
+        },
+        {
+          "info": {
+            "name": "Retrieve podcast-level listener analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/podcasts/listeners",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve podcast-level listener analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve location analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/location",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve location analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve time-of-week analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/time_of_week",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve time-of-week analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve campaign analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/campaigns/:campaign_id",
+            "params": [
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve campaign analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve technology analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve technology analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve listening-application analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology/applications",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve listening-application analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve browser analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology/browsers",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve browser analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve device-class analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology/device_class",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve device-class analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve device analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology/devices",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve device analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve listening-method analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology/listening_methods",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve listening-method analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve network-type analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology/network_types",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve network-type analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve operating-system analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology/operating_systems",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve operating-system analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve provider analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology/providers",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve provider analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve web-player analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/technology/web_players",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve web-player analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve embed-player analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/embed",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve embed-player analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve average completion for the embed player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/embed/avg_completion",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve average completion for the embed player"
+        },
+        {
+          "info": {
+            "name": "Retrieve embed-player analytics by episode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/embed/episodes",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve embed-player analytics by episode"
+        },
+        {
+          "info": {
+            "name": "Retrieve embed-player heatmap analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/embed/heatmap",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve embed-player heatmap analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve embed-player listens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/embed/listens",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve embed-player listens"
+        },
+        {
+          "info": {
+            "name": "Retrieve embed-player location analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/embed/locations",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve embed-player location analytics"
+        },
+        {
+          "info": {
+            "name": "Retrieve embed-player playback-speed analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.simplecast.com/analytics/embed/speeds",
+            "params": [
+              {
+                "name": "podcast",
+                "value": "",
+                "type": "query",
+                "description": "The podcast ID to scope the analytics query to."
+              }
+            ]
+          },
+          "docs": "Retrieve embed-player playback-speed analytics"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
