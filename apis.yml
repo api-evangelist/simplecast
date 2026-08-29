@@ -14,6 +14,18 @@ description: Simplecast is a podcast hosting, distribution, and analytics platfo
   authenticated user - with a small number of write operations such as uploading
   episode audio. Access requires a Simplecast account; broader API integration is
   positioned as part of the higher-tier (Professional / Enterprise) plans.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: open
