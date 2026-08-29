@@ -143,6 +143,9 @@ apis:
   - type: OpenCollection
     url: collections/simplecast.opencollection.json
 common:
+- type: CapabilityMap
+  url: capabilities/simplecast-capability-edges.yml
+  name: Simplecast Business Capability Map
 - type: AgenticAccess
   url: agentic-access/simplecast-agentic-access.yml
 - type: DomainSecurity
