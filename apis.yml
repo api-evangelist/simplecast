@@ -143,6 +143,11 @@ apis:
   - type: OpenCollection
     url: collections/simplecast.opencollection.json
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/sirius-xm/
+  name: SiriusXM
+  x-relationship: acquired
+  x-evidence: "Simplecast is a podcast hosting, distribution, and analytics platform for creators, networks, and brands, owned by SiriusXM Media (acquired by SiriusXM in 2020)."
 - type: CapabilityMap
   url: capabilities/simplecast-capability-edges.yml
   name: Simplecast Business Capability Map
