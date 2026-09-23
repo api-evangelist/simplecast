@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Simplecast Analytics Metadata API
-  description: 'The Simplecast API lets you manage and read your podcasting data on the Simplecast platform - podcasts (shows), episodes, audience analytics, and distribution channels. The API is accessed at https://api.simplecast.com and is self-describing: each response returns the actions available to the authenticated user. Authentication uses a bearer token obtained from the Private Apps page in the Simplecast dashboard (authorization: Bearer {token}). List endpoints support limit and offset query parameters for pagination. The API is predominantly read-only (HTTP GET); a small number of write operations exist, such as uploading episode audio. Simplecast is owned by SiriusXM Media. Endpoint paths in this document are derived from Simplecast''s official public Postman collection and API documentation; request and response schemas are lightly modeled where the docs do not publish a formal schema.'
+  title: Simplecast Metadata API
+  description: The Simplecast API lets you manage and read your podcasting data on the Simplecast platform - podcasts (shows), episodes, audience analytics, and distribution channels.
   version: '1.0'
   contact:
     name: Simplecast
@@ -143,7 +143,28 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    KeywordId:
+      name: keyword_id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Collection:
       type: object
       description: A paged collection of resources. Fields are modeled; the API is self-describing.
@@ -161,13 +182,6 @@ components:
               type: integer
             offset:
               type: integer
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     Resource:
       type: object
       description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
@@ -176,20 +190,6 @@ components:
           type: string
         href:
           type: string
-  parameters:
-    KeywordId:
-      name: keyword_id
-      in: path
-      required: true
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

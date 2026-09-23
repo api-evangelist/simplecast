@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Simplecast Analytics Podcasts API
-  description: 'The Simplecast API lets you manage and read your podcasting data on the Simplecast platform - podcasts (shows), episodes, audience analytics, and distribution channels. The API is accessed at https://api.simplecast.com and is self-describing: each response returns the actions available to the authenticated user. Authentication uses a bearer token obtained from the Private Apps page in the Simplecast dashboard (authorization: Bearer {token}). List endpoints support limit and offset query parameters for pagination. The API is predominantly read-only (HTTP GET); a small number of write operations exist, such as uploading episode audio. Simplecast is owned by SiriusXM Media. Endpoint paths in this document are derived from Simplecast''s official public Postman collection and API documentation; request and response schemas are lightly modeled where the docs do not publish a formal schema.'
+  title: Simplecast Podcasts API
+  description: The Simplecast API lets you manage and read your podcasting data on the Simplecast platform - podcasts (shows), episodes, audience analytics, and distribution channels.
   version: '1.0'
   contact:
     name: Simplecast
@@ -266,20 +266,59 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Index at which to start the page of results.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of objects to return.
+      schema:
+        type: integer
+    KeywordId:
+      name: keyword_id
+      in: path
+      required: true
+      schema:
+        type: string
+    PodcastId:
+      name: podcast_id
+      in: path
+      required: true
+      schema:
+        type: string
+    CategoryId:
+      name: category_id
+      in: path
+      required: true
+      schema:
+        type: string
+    SeasonId:
+      name: season_id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Podcast:
+    Error:
       type: object
-      description: A podcast (show). Fields are modeled from documented responses.
       properties:
-        id:
+        error:
           type: string
-        title:
-          type: string
-        description:
-          type: string
-        author:
-          type: string
-        href:
+        message:
           type: string
     Collection:
       type: object
@@ -298,13 +337,6 @@ components:
               type: integer
             offset:
               type: integer
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     Resource:
       type: object
       description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
@@ -313,52 +345,20 @@ components:
           type: string
         href:
           type: string
-  parameters:
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Index at which to start the page of results.
-      schema:
-        type: integer
-    SeasonId:
-      name: season_id
-      in: path
-      required: true
-      schema:
-        type: string
-    KeywordId:
-      name: keyword_id
-      in: path
-      required: true
-      schema:
-        type: string
-    CategoryId:
-      name: category_id
-      in: path
-      required: true
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of objects to return.
-      schema:
-        type: integer
-    PodcastId:
-      name: podcast_id
-      in: path
-      required: true
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Podcast:
+      type: object
+      description: A podcast (show). Fields are modeled from documented responses.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        author:
+          type: string
+        href:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

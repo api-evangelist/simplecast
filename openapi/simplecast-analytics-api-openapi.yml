@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Simplecast Analytics API
-  description: 'The Simplecast API lets you manage and read your podcasting data on the Simplecast platform - podcasts (shows), episodes, audience analytics, and distribution channels. The API is accessed at https://api.simplecast.com and is self-describing: each response returns the actions available to the authenticated user. Authentication uses a bearer token obtained from the Private Apps page in the Simplecast dashboard (authorization: Bearer {token}). List endpoints support limit and offset query parameters for pagination. The API is predominantly read-only (HTTP GET); a small number of write operations exist, such as uploading episode audio. Simplecast is owned by SiriusXM Media. Endpoint paths in this document are derived from Simplecast''s official public Postman collection and API documentation; request and response schemas are lightly modeled where the docs do not publish a formal schema.'
+  description: The Simplecast API lets you manage and read your podcasting data on the Simplecast platform - podcasts (shows), episodes, audience analytics, and distribution channels.
   version: '1.0'
   contact:
     name: Simplecast
@@ -532,6 +532,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Analytics:
       type: object
       description: An analytics result. Shape varies by analytics endpoint; modeled generically.
@@ -544,20 +551,6 @@ components:
           type: array
           items:
             type: object
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     PodcastQuery:
       name: podcast
@@ -566,6 +559,13 @@ components:
       description: The podcast ID to scope the analytics query to.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
