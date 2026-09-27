@@ -267,13 +267,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Index at which to start the page of results.
-      schema:
-        type: integer
     Limit:
       name: limit
       in: query
@@ -281,12 +274,6 @@ components:
       description: Maximum number of objects to return.
       schema:
         type: integer
-    KeywordId:
-      name: keyword_id
-      in: path
-      required: true
-      schema:
-        type: string
     PodcastId:
       name: podcast_id
       in: path
@@ -299,26 +286,33 @@ components:
       required: true
       schema:
         type: string
+    KeywordId:
+      name: keyword_id
+      in: path
+      required: true
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Index at which to start the page of results.
+      schema:
+        type: integer
     SeasonId:
       name: season_id
       in: path
       required: true
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    Resource:
       type: object
+      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
       properties:
-        error:
+        id:
           type: string
-        message:
+        href:
           type: string
     Collection:
       type: object
@@ -337,14 +331,6 @@ components:
               type: integer
             offset:
               type: integer
-    Resource:
-      type: object
-      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
-      properties:
-        id:
-          type: string
-        href:
-          type: string
     Podcast:
       type: object
       description: A podcast (show). Fields are modeled from documented responses.
@@ -359,6 +345,20 @@ components:
           type: string
         href:
           type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

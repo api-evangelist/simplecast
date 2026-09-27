@@ -143,27 +143,14 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    KeywordId:
-      name: keyword_id
-      in: path
-      required: true
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    Resource:
       type: object
+      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
       properties:
-        error:
+        id:
           type: string
-        message:
+        href:
           type: string
     Collection:
       type: object
@@ -182,14 +169,27 @@ components:
               type: integer
             offset:
               type: integer
-    Resource:
+    Error:
       type: object
-      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
       properties:
-        id:
+        error:
           type: string
-        href:
+        message:
           type: string
+  parameters:
+    KeywordId:
+      name: keyword_id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
