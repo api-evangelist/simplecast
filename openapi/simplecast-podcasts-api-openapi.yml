@@ -267,6 +267,12 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
+    PodcastId:
+      name: podcast_id
+      in: path
+      required: true
+      schema:
+        type: string
     Limit:
       name: limit
       in: query
@@ -274,8 +280,8 @@ components:
       description: Maximum number of objects to return.
       schema:
         type: integer
-    PodcastId:
-      name: podcast_id
+    KeywordId:
+      name: keyword_id
       in: path
       required: true
       schema:
@@ -286,8 +292,8 @@ components:
       required: true
       schema:
         type: string
-    KeywordId:
-      name: keyword_id
+    SeasonId:
+      name: season_id
       in: path
       required: true
       schema:
@@ -299,21 +305,7 @@ components:
       description: Index at which to start the page of results.
       schema:
         type: integer
-    SeasonId:
-      name: season_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    Resource:
-      type: object
-      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
-      properties:
-        id:
-          type: string
-        href:
-          type: string
     Collection:
       type: object
       description: A paged collection of resources. Fields are modeled; the API is self-describing.
@@ -331,6 +323,21 @@ components:
               type: integer
             offset:
               type: integer
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Resource:
+      type: object
+      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
+      properties:
+        id:
+          type: string
+        href:
+          type: string
     Podcast:
       type: object
       description: A podcast (show). Fields are modeled from documented responses.
@@ -344,13 +351,6 @@ components:
         author:
           type: string
         href:
-          type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
           type: string
   responses:
     Unauthorized:

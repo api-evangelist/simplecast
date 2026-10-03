@@ -531,22 +531,14 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    PodcastQuery:
-      name: podcast
-      in: query
-      required: false
-      description: The podcast ID to scope the analytics query to.
-      schema:
-        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Analytics:
       type: object
       description: An analytics result. Shape varies by analytics endpoint; modeled generically.
@@ -559,13 +551,21 @@ components:
           type: array
           items:
             type: object
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
+  parameters:
+    PodcastQuery:
+      name: podcast
+      in: query
+      required: false
+      description: The podcast ID to scope the analytics query to.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
