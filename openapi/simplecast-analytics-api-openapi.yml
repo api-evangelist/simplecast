@@ -532,13 +532,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     Analytics:
       type: object
       description: An analytics result. Shape varies by analytics endpoint; modeled generically.
@@ -551,6 +544,13 @@ components:
           type: array
           items:
             type: object
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
   parameters:
     PodcastQuery:
       name: podcast

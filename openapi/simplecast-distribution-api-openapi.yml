@@ -84,19 +84,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    PodcastId:
-      name: podcast_id
-      in: path
-      required: true
-      schema:
-        type: string
-    ChannelId:
-      name: channel_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
     Collection:
       type: object
@@ -130,6 +117,19 @@ components:
           type: string
         href:
           type: string
+  parameters:
+    PodcastId:
+      name: podcast_id
+      in: path
+      required: true
+      schema:
+        type: string
+    ChannelId:
+      name: channel_id
+      in: path
+      required: true
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Missing or invalid bearer token.

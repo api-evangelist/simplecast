@@ -273,13 +273,6 @@ components:
       required: true
       schema:
         type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of objects to return.
-      schema:
-        type: integer
     KeywordId:
       name: keyword_id
       in: path
@@ -298,6 +291,13 @@ components:
       required: true
       schema:
         type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of objects to return.
+      schema:
+        type: integer
     Offset:
       name: offset
       in: query
@@ -330,14 +330,6 @@ components:
           type: string
         message:
           type: string
-    Resource:
-      type: object
-      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
-      properties:
-        id:
-          type: string
-        href:
-          type: string
     Podcast:
       type: object
       description: A podcast (show). Fields are modeled from documented responses.
@@ -349,6 +341,14 @@ components:
         description:
           type: string
         author:
+          type: string
+        href:
+          type: string
+    Resource:
+      type: object
+      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
+      properties:
+        id:
           type: string
         href:
           type: string
