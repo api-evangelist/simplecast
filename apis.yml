@@ -49,7 +49,7 @@ tags:
 - Media
 - SiriusXM Media
 created: '2026-07-05'
-modified: '2026-07-05'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: simplecast:simplecast-analytics-api
@@ -143,6 +143,8 @@ apis:
   - type: OpenCollection
     url: collections/simplecast.opencollection.json
 common:
+- url: https://blog.simplecast.com/rss.xml
+  type: BlogRSS
 - type: ParentCompany
   url: https://apis.io/providers/sirius-xm/
   name: SiriusXM
