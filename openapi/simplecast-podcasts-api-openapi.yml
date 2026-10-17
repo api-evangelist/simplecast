@@ -267,14 +267,28 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    PodcastId:
-      name: podcast_id
+    KeywordId:
+      name: keyword_id
       in: path
       required: true
       schema:
         type: string
-    KeywordId:
-      name: keyword_id
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Index at which to start the page of results.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of objects to return.
+      schema:
+        type: integer
+    SeasonId:
+      name: season_id
       in: path
       required: true
       schema:
@@ -285,44 +299,21 @@ components:
       required: true
       schema:
         type: string
-    SeasonId:
-      name: season_id
+    PodcastId:
+      name: podcast_id
       in: path
       required: true
       schema:
         type: string
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of objects to return.
-      schema:
-        type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Index at which to start the page of results.
-      schema:
-        type: integer
   schemas:
-    Collection:
+    Resource:
       type: object
-      description: A paged collection of resources. Fields are modeled; the API is self-describing.
+      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
       properties:
-        collection:
-          type: array
-          items:
-            $ref: '#/components/schemas/Resource'
-        pages:
-          type: object
-          properties:
-            total:
-              type: integer
-            limit:
-              type: integer
-            offset:
-              type: integer
+        id:
+          type: string
+        href:
+          type: string
     Error:
       type: object
       properties:
@@ -344,14 +335,23 @@ components:
           type: string
         href:
           type: string
-    Resource:
+    Collection:
       type: object
-      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
+      description: A paged collection of resources. Fields are modeled; the API is self-describing.
       properties:
-        id:
-          type: string
-        href:
-          type: string
+        collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        pages:
+          type: object
+          properties:
+            total:
+              type: integer
+            limit:
+              type: integer
+            offset:
+              type: integer
   responses:
     Unauthorized:
       description: Missing or invalid bearer token.

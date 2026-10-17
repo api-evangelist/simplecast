@@ -149,7 +149,35 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    KeywordId:
+      name: keyword_id
+      in: path
+      required: true
+      schema:
+        type: string
+    EpisodeId:
+      name: episode_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    Resource:
+      type: object
+      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
+      properties:
+        id:
+          type: string
+        href:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Collection:
       type: object
       description: A paged collection of resources. Fields are modeled; the API is self-describing.
@@ -167,13 +195,6 @@ components:
               type: integer
             offset:
               type: integer
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     Episode:
       type: object
       description: An episode. Fields are modeled from documented responses.
@@ -193,27 +214,6 @@ components:
           format: date-time
         href:
           type: string
-    Resource:
-      type: object
-      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
-      properties:
-        id:
-          type: string
-        href:
-          type: string
-  parameters:
-    KeywordId:
-      name: keyword_id
-      in: path
-      required: true
-      schema:
-        type: string
-    EpisodeId:
-      name: episode_id
-      in: path
-      required: true
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Missing or invalid bearer token.

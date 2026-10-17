@@ -85,6 +85,21 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Resource:
+      type: object
+      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
+      properties:
+        id:
+          type: string
+        href:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Collection:
       type: object
       description: A paged collection of resources. Fields are modeled; the API is self-describing.
@@ -102,30 +117,15 @@ components:
               type: integer
             offset:
               type: integer
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    Resource:
-      type: object
-      description: A generic Simplecast resource. The API is self-describing; exact fields vary by type.
-      properties:
-        id:
-          type: string
-        href:
-          type: string
   parameters:
-    PodcastId:
-      name: podcast_id
+    ChannelId:
+      name: channel_id
       in: path
       required: true
       schema:
         type: string
-    ChannelId:
-      name: channel_id
+    PodcastId:
+      name: podcast_id
       in: path
       required: true
       schema:
