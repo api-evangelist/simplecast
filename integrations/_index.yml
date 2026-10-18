@@ -31,7 +31,7 @@
     - alpha
     in_cloud: true
     builder: unknown (community connector; contributor not in the record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: simplecast-fivetran
   label: Fivetran
@@ -57,5 +57,5 @@
     - connectors/applications/simplecast
     vendor_link: https://www.simplecast.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
